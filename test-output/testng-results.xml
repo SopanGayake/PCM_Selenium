@@ -2,48 +2,48 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-06-19T12:51:32 IST" name="RTC Suite" finished-at="2023-06-19T12:52:10 IST" duration-ms="37764">
+  <suite started-at="2023-06-20T16:40:04 IST" name="Default suite" finished-at="2023-06-20T16:41:20 IST" duration-ms="75780">
     <groups>
     </groups>
-    <test started-at="2023-06-19T12:51:32 IST" name="RTC Test" finished-at="2023-06-19T12:52:10 IST" duration-ms="37764">
+    <test started-at="2023-06-20T16:40:04 IST" name="Default test" finished-at="2023-06-20T16:41:20 IST" duration-ms="75780">
       <class name="TestCases.LoginTestCases">
-        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:32 IST" name="setup" finished-at="2023-06-19T12:51:40 IST" duration-ms="7560" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:04 IST" name="setup" finished-at="2023-06-20T16:40:27 IST" duration-ms="23369" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="PrintUser()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:40 IST" name="PrintUser" finished-at="2023-06-19T12:51:45 IST" duration-ms="5022" status="PASS">
+        <test-method signature="PrintUser()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:27 IST" name="PrintUser" finished-at="2023-06-20T16:40:32 IST" duration-ms="5014" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- PrintUser -->
-        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:45 IST" name="exit" finished-at="2023-06-19T12:51:45 IST" duration-ms="178" status="PASS">
+        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:32 IST" name="exit" finished-at="2023-06-20T16:40:35 IST" duration-ms="2384" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exit -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:45 IST" name="setup" finished-at="2023-06-19T12:51:52 IST" duration-ms="6558" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:35 IST" name="setup" finished-at="2023-06-20T16:40:56 IST" duration-ms="21776" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="jazzLogoTest()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:52 IST" name="jazzLogoTest" finished-at="2023-06-19T12:51:52 IST" duration-ms="49" status="PASS">
+        <test-method signature="jazzLogoTest()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:56 IST" name="jazzLogoTest" finished-at="2023-06-20T16:40:57 IST" duration-ms="136" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- jazzLogoTest -->
-        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:52 IST" name="exit" finished-at="2023-06-19T12:51:52 IST" duration-ms="276" status="PASS">
+        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:57 IST" name="exit" finished-at="2023-06-20T16:40:57 IST" duration-ms="212" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exit -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:52 IST" name="setup" finished-at="2023-06-19T12:51:58 IST" duration-ms="5564" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:40:57 IST" name="setup" finished-at="2023-06-20T16:41:05 IST" duration-ms="8314" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="loginToAppTest()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:51:58 IST" name="loginToAppTest" finished-at="2023-06-19T12:52:08 IST" duration-ms="10440" status="PASS">
+        <test-method signature="loginToAppTest()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:41:05 IST" name="loginToAppTest" finished-at="2023-06-20T16:41:17 IST" duration-ms="12155" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToAppTest -->
-        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@3349e9bb]" started-at="2023-06-19T12:52:08 IST" name="exit" finished-at="2023-06-19T12:52:10 IST" duration-ms="2021" status="PASS">
+        <test-method is-config="true" signature="exit()[pri:0, instance:TestCases.LoginTestCases@6aeb35e6]" started-at="2023-06-20T16:41:17 IST" name="exit" finished-at="2023-06-20T16:41:20 IST" duration-ms="2255" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- exit -->
       </class> <!-- TestCases.LoginTestCases -->
-    </test> <!-- RTC Test -->
-  </suite> <!-- RTC Suite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>
