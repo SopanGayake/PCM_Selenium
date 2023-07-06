@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestCases.LoginTestCases">
+      <class name="TestCases.PCF_GUI_TestCases">
         <methods>
           <include name="exit"/>
           <include name="setup"/>
-          <include name="loginToAppTest"/>
+          <include name="verifyOnlyethelabelWithValueTest"/>
         </methods>
-      </class> <!-- TestCases.LoginTestCases -->
+      </class> <!-- TestCases.PCF_GUI_TestCases -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

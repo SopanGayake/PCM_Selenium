@@ -1,8 +1,12 @@
 package BasePackage;
 
 import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -11,6 +15,8 @@ import java.util.Properties;
 public class TestBase {
 	public static WebDriver driver;
 	public static Properties prop;
+	
+	// Reading Property file for credential 
 	public String readPropertyFile(String value) throws IOException 
 	{
 		prop = new Properties();
@@ -18,26 +24,34 @@ public class TestBase {
 		prop.load(file);
 		return prop.getProperty(value); 
 	}
+	
 	public void initalization() throws IOException, InterruptedException
+	//TC_LI_UI001
+	// Navigate to the login page
 	{
-		ChromeOptions o = new ChromeOptions();
-    	o.setAcceptInsecureCerts(true);
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		driver = new ChromeDriver(o);
-
-        // Navigate to the login page
-        driver.get(readPropertyFile("url"));
-        Thread.sleep(2000);
+		String browserName = readPropertyFile("browser");  //edge
+		if(browserName.equalsIgnoreCase("edge"))
+		{	
+			EdgeOptions o = new EdgeOptions();
+		    o.setAcceptInsecureCerts(true);
+		    System.setProperty("webdriver.edge.driver","msedgedriver.exe");
+		    driver = new EdgeDriver(o);
+		    driver.get(readPropertyFile("url"));
+		    Thread.sleep(2000);
+		}
+		else if(browserName.equalsIgnoreCase("chrome"))
+		{
+			ChromeOptions o = new ChromeOptions();
+			o.setAcceptInsecureCerts(true);
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+			driver = new ChromeDriver(o);
+		    driver.get(readPropertyFile("url"));
+		    Thread.sleep(2000);
+		    System.out.println(driver.getTitle()); 
+		}  
 		
-//		String browserName = readPropertyFile("browser");  //edge
-//		if(browserName.equalsIgnoreCase("chrome"))
-//		{
-//		ChromeOptions o = new ChromeOptions();
-//		o.addArguments("--disable-notifications");
-//		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-//		driver = new ChromeDriver(o);
-//		}
-//		
+	}	
+}
 //		else if(browserName.equalsIgnoreCase("firefox"))
 //		{
 //			System.setProperty("webdriver.gecko.driver", "geckodriver");
@@ -63,7 +77,7 @@ public class TestBase {
 //		driver.manage().deleteAllCookies();
 //		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //		driver.get(readPropertyFile("url"));
-	}
+//	}
 	
 //	public static void readExcelFile() throws IOException
 //	{
@@ -90,8 +104,4 @@ public class TestBase {
 //				}
 //			}
 //			System.out.println();
-//		}
-//	
-//	}
 	
-}
