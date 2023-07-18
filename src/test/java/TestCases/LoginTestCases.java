@@ -100,10 +100,6 @@ public class LoginTestCases extends TestBase {
 		System.out.println("ok");
 	}
 	
-	
-	
-	
-	
 //	@Test (enabled = true)
 //	public void readExcelFile1() throws  IOException, InterruptedException 
 //	{

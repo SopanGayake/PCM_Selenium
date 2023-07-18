@@ -20,13 +20,12 @@ public class TestBase {
 	public String readPropertyFile(String value) throws IOException 
 	{
 		prop = new Properties();
-		FileInputStream file = new FileInputStream("C:\\Users\\Sopan Gayake\\eclipse-workspace\\MavenProject\\src\\main\\java\\ConfigPackage\\config.properties");
+		FileInputStream file = new FileInputStream("C:\\Users\\Sopan Gayake\\eclipse-workspace\\PCMTestingFramework\\src\\main\\java\\ConfigPackage\\config.properties");
 		prop.load(file);
 		return prop.getProperty(value); 
 	}
 	
 	public void initalization() throws IOException, InterruptedException
-	//TC_LI_UI001
 	// Navigate to the login page
 	{
 		String browserName = readPropertyFile("browser");  //edge
@@ -36,7 +35,7 @@ public class TestBase {
 		    o.setAcceptInsecureCerts(true);
 		    System.setProperty("webdriver.edge.driver","msedgedriver.exe");
 		    driver = new EdgeDriver(o);
-		    driver.get(readPropertyFile("url"));
+		    driver.get(readPropertyFile("FPMurl"));
 		    Thread.sleep(2000);
 		}
 		else if(browserName.equalsIgnoreCase("chrome"))
@@ -47,7 +46,6 @@ public class TestBase {
 			driver = new ChromeDriver(o);
 		    driver.get(readPropertyFile("url"));
 		    Thread.sleep(2000);
-		    System.out.println(driver.getTitle()); 
 		}  
 		
 	}	
