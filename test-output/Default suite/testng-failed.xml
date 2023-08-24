@@ -3,13 +3,26 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestCases.FPMSanityTestCases">
+      <class name="TestCases.AddButtonsValuesMappingTesting">
         <methods>
-          <include name="ok"/>
-          <include name="exit"/>
+          <include name="BouquetABTest"/>
+          <include name="SDMappingABTest"/>
+          <include name="BroadcasterFPMABTest"/>
+          <include name="ALCFPMinABTest"/>
+          <include name="TPCuratedFPMABTest"/>
+          <include name="FTAFPMinABTest"/>
+          <include name="OTTComboFPMABTest"/>
+          <include name="DropBroadcasterFPMABTest"/>
+          <include name="AddBroadcasterFPMABTest"/>
+          <include name="AddTPFPMsABTest"/>
+          <include name="SecondaryGenreABTest"/>
           <include name="setup"/>
+          <include name="exit"/>
+          <include name="DropTataPlayCuratedFPMABTest"/>
+          <include name="BackendPacksinABTest"/>
+          <include name="GetNameOfAddButtonsTest"/>
         </methods>
-      </class> <!-- TestCases.FPMSanityTestCases -->
+      </class> <!-- TestCases.AddButtonsValuesMappingTesting -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

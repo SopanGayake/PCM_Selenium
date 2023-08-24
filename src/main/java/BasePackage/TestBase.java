@@ -6,10 +6,13 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
 
 
 public class TestBase {
@@ -35,7 +38,7 @@ public class TestBase {
 		    o.setAcceptInsecureCerts(true);
 		    System.setProperty("webdriver.edge.driver","msedgedriver.exe");
 		    driver = new EdgeDriver(o);
-		    driver.get(readPropertyFile("FPMurl"));
+		    driver.get(readPropertyFile("fpmurl"));
 		    Thread.sleep(2000);
 		}
 		else if(browserName.equalsIgnoreCase("chrome"))
@@ -44,9 +47,17 @@ public class TestBase {
 			o.setAcceptInsecureCerts(true);
 			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 			driver = new ChromeDriver(o);
-		    driver.get(readPropertyFile("url"));
+		    driver.get(readPropertyFile("fpmurl"));
 		    Thread.sleep(2000);
 		}  
+		else if (browserName.equalsIgnoreCase("firefox")) {
+		    FirefoxOptions o = new FirefoxOptions();
+		    o.setAcceptInsecureCerts(true);
+		    System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+		    driver = new FirefoxDriver(o);
+		    driver.get(readPropertyFile("fpmurl"));
+		    Thread.sleep(2000);
+		}
 		
 	}	
 }

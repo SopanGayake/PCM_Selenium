@@ -15,8 +15,6 @@ import BasePackage.TestBase;
 public class PCF_GUI_Page extends TestBase{
 	
 	//Object Repository GUI
-	
-	
 	@FindBy(xpath="//*//*[@id=\"jazz_app_internal_LoginWidget_0\"]/div[1]/div[1]/div[1]/div") private WebElement jazzLogo;
 	@FindBy(xpath="//div[@class='serverInfo']") private WebElement LoginInstruction;
 	@FindBy(xpath="//div[@class='illustration']") private WebElement Image;
