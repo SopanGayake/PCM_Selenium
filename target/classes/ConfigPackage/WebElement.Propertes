@@ -1,0 +1,9 @@
+#Credential
+user_id = dynamic
+password = admin
+browser = chrome
+
+#LoginPage
+UserIDTextBox_XPATH = //input[@name='username']
+PasswordTextBox_XPATH = //input[@name='password']
+SigninButton_XPATH = //button[text()='Sign In']

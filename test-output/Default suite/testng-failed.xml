@@ -3,26 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestCases.AddButtonsValuesMappingTesting">
+      <class name="TestCases.CCF_GUITesting">
         <methods>
-          <include name="BouquetABTest"/>
-          <include name="SDMappingABTest"/>
-          <include name="BroadcasterFPMABTest"/>
-          <include name="ALCFPMinABTest"/>
-          <include name="TPCuratedFPMABTest"/>
-          <include name="FTAFPMinABTest"/>
-          <include name="OTTComboFPMABTest"/>
-          <include name="DropBroadcasterFPMABTest"/>
-          <include name="AddBroadcasterFPMABTest"/>
-          <include name="AddTPFPMsABTest"/>
-          <include name="SecondaryGenreABTest"/>
           <include name="setup"/>
           <include name="exit"/>
-          <include name="DropTataPlayCuratedFPMABTest"/>
-          <include name="BackendPacksinABTest"/>
-          <include name="GetNameOfAddButtonsTest"/>
+          <include name="ITReviewSectionTest"/>
         </methods>
-      </class> <!-- TestCases.AddButtonsValuesMappingTesting -->
+      </class> <!-- TestCases.CCF_GUITesting -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

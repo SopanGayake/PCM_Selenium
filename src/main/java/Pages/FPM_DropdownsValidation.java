@@ -1,858 +1,972 @@
 package Pages;
 
-
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.io.FileInputStream;
-import java.io.IOException;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook; // For .xlsx files
+import java.time.Duration;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
 import BasePackage.TestBase;
 
-
 public class FPM_DropdownsValidation extends TestBase{
-	
-	//Object Repository for GUI
-	@FindBy(xpath="//button[@aria-label='open drawer']") private WebElement openDrawerMenu;
-	@FindBy(xpath="//span[text()='FPM']") private WebElement SelectFPMWI;
-	@FindBy(xpath="//p[text()='Frontend Pack Master']") private WebElement SelectfrontendPackMasterTab;
-	@FindBy(xpath="//p[text()='Pack Master Details ']") private WebElement PackMasterDetailsSection;
-	@FindBy(xpath="//p[text()='Pack Available for ']") private WebElement PackAvailableforSection;
-	@FindBy(xpath="//p[text()='CA ID Details ']") private WebElement CAIDDetails;
-	@FindBy(xpath="//p[text()='Compatible Packs to be expired with the launch of new pack ']") private WebElement CompatiblePacksSection;
-	@FindBy(xpath="//p[text()='Additional Business Rules ']") private WebElement AdditionalBusinessRulesSection;
-	@FindBy(xpath="//p[text()='Comments ']") private WebElement CommentsSection;
-	@FindBy(xpath="//p[text()='Channel details']") private WebElement ChanneldetailsTab;
-	@FindBy(xpath="//p[text()='Channel add/drop ']") private WebElement ChannelAddropSection;
+	@FindBy(xpath="//p[text()='Channel Details']") private WebElement ChannelDetailsTab;
 	@FindBy(xpath="//p[text()='Backend Pack Mapping']") private WebElement BackendPackMappingTab;
-	@FindBy(xpath="//p[text()='UNKNOWN 1 ']") private WebElement BackendPackMappingSection;
-	@FindBy(xpath="//p[text()='Approval']") private WebElement ApprovalTab;
-	@FindBy(xpath="//p[text()='Approvals ']") private WebElement ApprovalsSection;
+	@FindBy(xpath="//p[text()='Links']") private WebElement LinksTab;
+	@FindBy(xpath="//p[text()='Change History']") private WebElement ChangeHistoryTab;
 	
+	@FindAll({@FindBy(xpath = "//div[@aria-type='select']")})private List<WebElement> DropdownsList;
+	String FPMExcelTestData = "C:\\Users\\Sopan.Gayake\\eclipse-workspace\\PCMTestingFramework\\TestData\\FPM_ui_table.xlsx";
+	ArrayList<String> ExcelTestData = new ArrayList<>();
+	List<String> webSectionList = new ArrayList<>();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+
 	
-		String TestDataExcelFPM = "C:\\Users\\Sopan Gayake\\eclipse-workspace\\PCMTestingFramework\\TestData\\TestDataFileFPM.xlsx";
-		//Constructor for element initialization
-		public FPM_DropdownsValidation() {
-			PageFactory.initElements(driver, this);
-		}
-
-		public void TypeOfPackDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Type Of Pack']"));
-			Select dropdown = new Select(dropdownElement);
-	        List<WebElement> options = dropdown.getOptions();
-	        List<String> webSectionList = new ArrayList<>();
-	        for (WebElement option : options) {
-	        	if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-	        }
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-				Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(1); // Column 1
-
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-						}
-					}
-				if (webSectionList.equals(ExcelTestData)) {
-			        System.out.println("Both lists of web elements are the same.");
-			    } else {
-	    			throw new Exception("Faild because List are not mtching");
-		 		}
-			} catch (IOException e) {
-			 e.printStackTrace();
-			}
-		}
-		public void NameOfBroadcasterDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Name Of Broadcaster']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-				Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(2); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void PackageDashboardCategoryDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Package Dashboard Category']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(3); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void OfferTypeforServicesDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Offer Type for Services']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(4); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void PackGradeTypeDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Pack Grade Type']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(5); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void PackStatusDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Pack Status']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(6); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void UnitOfMeasureUoMDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Unit Of Measure(UoM)']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(7); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void SDHD_DD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='SD/HD']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(8); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void BroadcasterCategoryforDisplays() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Broadcaster Category for Displays']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(9); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void TataPlayPacksCategoryforDisplays() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='TataPlay Packs Category for Displays']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(10); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void ChannelCategoryforDisplay() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Channel Category for Display']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(11); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void DASLevelValidationDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='DAS Level Validation']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(12); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void AnyBoxTypePrimaryBestBoxValidationDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Any Box Type(Primary/Best Box) Validation']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(13); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void UnitofMeasureUoMforNonODUPacksDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Unit of Measure (UoM) for Non-ODU Packs']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(14); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void RENTAL_FLAG_DD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='RENTAL_FLAG']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(15); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void PAYABLE_FLAG_DD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='PAYABLE_FLAG']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(16); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void IS_Trai_Enable_flag_DD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='IS_Trai_Enable_flag']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(17); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void TobemadeavailablefordealersinmSalesDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='To be made available for dealers in mSales']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(18); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void SubscriberTypeNewExistingDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Subscriber Type(New/Existing)']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(19); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void PackVariationDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Pack Variation']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(20); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void AnyStatelevelvalidationDD() throws Exception {
-			openDrawerMenu.click();
-			SelectFPMWI.click();
-			SelectfrontendPackMasterTab.click();
-			PackMasterDetailsSection.click();
-			WebElement dropdownElement = driver.findElement(By.xpath("//select[@name='Any State level validation']"));
-			Select dropdown = new Select(dropdownElement);
-			List<WebElement> options = dropdown.getOptions();
-			List<String> webSectionList = new ArrayList<>();
-			for (WebElement option : options) {
-				if( option.getText() != "" && option.getText() != " ") {
-					webSectionList.add(option.getText());
-					System.out.println(option.getText());
-					
-				}
-			}
-			
-			ArrayList<String> ExcelTestData = new ArrayList<>();
-			try (FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-					Workbook workbook = new XSSFWorkbook(excelFile)) {
-				Sheet sheet = workbook.getSheet("All FPM Dropdowns21"); // Assuming you want to read data from sheet 2
-				for (Row row : sheet) {
-					Cell ColumnNumber = row.getCell(21); // Column 1
-					
-					if (ColumnNumber != null) {
-						String cell = ColumnNumber.getStringCellValue();
-						ExcelTestData.add(cell);
-					}
-				}
-				if (webSectionList.equals(ExcelTestData)) {
-					System.out.println("Both lists of web elements are the same.");
-				} else {
-					throw new Exception("Faild because List are not mtching");
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		public void readExcelData1()throws IOException {
+	//Constructor for element initialization
+	public FPM_DropdownsValidation() {
+		PageFactory.initElements(driver, this);
+	}
+	public void FrontendPackMasterDropdownList() throws Exception
+	{
+		for (WebElement element : DropdownsList) 
+		{
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		} 
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(0);
 				
-			FileInputStream excelFile = new FileInputStream(TestDataExcelFPM);
-			Workbook workbook = WorkbookFactory.create(excelFile);
-			Sheet sheet = workbook.getSheet("All FPM Dropdowns21");
-			Row row = sheet.getRow(2);
-			Cell cell = row.getCell(2);
-			String cellValue = cell.getStringCellValue();
-			workbook.close();
-			excelFile.close();
-			System.out.println(cellValue);
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
-}	
-				// Encapsulation = data (private) + method (public)
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void TypeofPackDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Type of Pack']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(1);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void NameofBroadcasterDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Name of Broadcaster']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(2);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PackageDashboardDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Package Dashboard Category for services']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(3);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void OfferTypeServicesDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Offer Type for Services']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(4);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PackGradeTypeDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Pack Grade Type']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(5);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PackStatusDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Pack Status ']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(6);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void UnitofMeasureDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Unit of Measure (UoM)']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(7);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void SDHDDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='SD/HD']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(8);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void BroadcasterCategoryDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Broadcaster Category for Display']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(9);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void TataPlayPacks() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Tata Play Packs Category for Display']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(10);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void ChannelCategoryDisplayDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Channel Category for Display']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(11);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void DASLevelValidation() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='DAS Level Validation']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(12);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void AnyBoxTypeDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Any Box Type (Primary/Best Box) Validation']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(13);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void UnitOfMeasure2DD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Unit of Measure (UoM) for Non-ODU Packs']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(14);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void RentalFlagDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Rental Flag']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(15);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PayableFlagDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Payable Flag']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(16);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void IsTraiEnableDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Is Trai Enable Flag']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(17);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void ToMadeinMSalesDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='To be made available for Dealers in mSales']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(18);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void SubscriberTypeDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Subscriber Type (New/Existing)']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(19);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PackVariationDD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Pack Variation']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(20);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void ChannelofFTADD() throws Exception
+	{
+		
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Channel to be part of FTA']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(21);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void ChannelDetailsDropdownList() throws Exception
+	{
+		ChannelDetailsTab.click();
+		for (WebElement element : DropdownsList) 
+		{
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		} 
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(22);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void BackendPackMappingTabDropdownList() throws Exception
+	{
+		BackendPackMappingTab.click();
+		for (WebElement element : DropdownsList) 
+		{
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		} 
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(23);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void SinglePackDD() throws Exception
+	{
+		BackendPackMappingTab.click();
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Single Pack/Combo Pack']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(24);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void LinksTabDropdownList() throws Exception
+	{
+		LinksTab.click();
+		for (WebElement element : DropdownsList) 
+		{
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		} 
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(25);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void ChangeHistoryTabDropdownList() throws Exception
+	{
+		ChangeHistoryTab.click();
+		for (WebElement element : DropdownsList) 
+		{
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		} 
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(26);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void PDMProductLineDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='PDM_Product Line']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(27);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void AnyBoxTypeValidationDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='#Any Box Type (Best Box) Validation for Acquisition packs']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(28);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void AmazonPrimeVideoDD() throws Exception
+	{
+		WebElement element = driver.findElement(By.xpath("//div[@aria-label='Amazon prime video Integration ID (Bundle ID)']"));
+		element.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox li")));
+		List<WebElement> optionElements = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+		for (WebElement option : optionElements) {
+		System.out.println(option.getText());
+		webSectionList.add(option.getText());
+		}	
+		FileInputStream excelFile = new FileInputStream(FPMExcelTestData);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("DropdownValidation");
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(29);
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="TestCases.PCF_GUITesting">
+        <methods>
+          <include name="DiscussionSectionTest"/>
+          <include name="EligibilityCommercialTest"/>
+          <include name="ChargingCorporateTest"/>
+          <include name="B_MailSectionTest"/>
+          <include name="ChargingApplicableRCTest"/>
+          <include name="ChargingResidentialTest"/>
+          <include name="CompatiblePacksSectionTest"/>
+          <include name="ITSolutionNoteFiles"/>
+          <include name="SelfCareSectionTest"/>
+          <include name="ReviewDetailsSectionValidation"/>
+          <include name="EligibilityRuleValidation"/>
+          <include name="ChangeHistorySectionTest"/>
+          <include name="mSalesSectionTest"/>
+          <include name="ITReviewSectionValidation"/>
+          <include name="exit"/>
+          <include name="BillDescriptionTest"/>
+          <include name="EligibilityResidentialTest"/>
+          <include name="EffortEstimationTest"/>
+          <include name="ChargingTradeValidation"/>
+          <include name="A_PCFFormDetailsTest"/>
+          <include name="BusinessReviewTabValidation"/>
+          <include name="ChargingRuleTest"/>
+          <include name="MissedCallSectionTest"/>
+          <include name="ChargingCommercialTest"/>
+          <include name="EligibilitySubCategoryValidation"/>
+          <include name="ChargingSubCategoryTest"/>
+          <include name="setup"/>
+          <include name="MissedCallSPMTest"/>
+          <include name="PRMSalesSectionTest"/>
+          <include name="EligibilityCorporateTest"/>
+          <include name="BIRelatedSectionTest"/>
+          <include name="EligibilityTradeTest"/>
+          <include name="SiebelCompSectonTest"/>
+          <include name="ChargingApplicableNRCTest"/>
+          <include name="ChargingSectionTest"/>
+        </methods>
+      </class> <!-- TestCases.PCF_GUITesting -->
+      <class name="TestCases.CCF_GUITesting">
+        <methods>
+          <include name="PRMSectionTest"/>
+          <include name="ReviewerNamesSectionValidation"/>
+          <include name="ApprovalSectionTest"/>
+          <include name="ChangeHistorySectionTest"/>
+          <include name="AdditionalBusinessSectionTest"/>
+          <include name="ITReviewSectionTest"/>
+          <include name="AA_CCFFormDetailsTest"/>
+          <include name="AlertsSectionTest"/>
+          <include name="PriceListSectionTest"/>
+          <include name="setup"/>
+          <include name="ChargeSectionTest"/>
+          <include name="LinksectionTest"/>
+          <include name="UATSectionTest"/>
+          <include name="WorkOrderSectionTest"/>
+          <include name="ReviewDetailsSectionTest"/>
+          <include name="ReviewedSignoffTest"/>
+          <include name="EffortEstimationSectionTest"/>
+          <include name="exit"/>
+        </methods>
+      </class> <!-- TestCases.CCF_GUITesting -->
+      <class name="TestCases.BPM_GUIPageTesting">
+        <methods>
+          <include name="BackendPackMasterTest"/>
+          <include name="setup"/>
+          <include name="FrontendPackValidation"/>
+          <include name="G_ChangeHistorySectionTest"/>
+          <include name="exit"/>
+          <include name="ChannelsAddDropTest"/>
+          <include name="A_BPMFormDetailsTest"/>
+        </methods>
+      </class> <!-- TestCases.BPM_GUIPageTesting -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

@@ -10,8 +10,8 @@
 		TataPlay</name>
 	<description>Tata play project</description>
 	<properties>
-		<maven.compiler.source>1.11</maven.compiler.source>
-		<maven.compiler.target>1.11</maven.compiler.target>
+		<maven.compiler.source>1.17</maven.compiler.source>
+		<maven.compiler.target>1.17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testng.version>7.4.0</testng.version>
 	</properties>
@@ -21,21 +21,15 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version> <!-- Replace with the desired version -->
-				<configuration>
-					<source>1.8</source> <!-- Specify the Java version you are
-					using -->
-					<target>1.8</target> <!-- Specify the target Java version -->
-				</configuration>
+				<version>3.12.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version> <!-- Replace with the desired version -->
+				<version>3.0.0-M9</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile> <!-- Replace with
-						your TestNG XML file path -->
+						<suiteXmlFile>DropdownsTestNG.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
@@ -44,30 +38,39 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>
-				org.seleniumhq.selenium</groupId>
+			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>4.9.1</version>
 		</dependency>
 		<dependency>
-			<groupId>
-				org.testng</groupId>
+			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.7.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>
-				org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>4.1.2</version> <!-- Replace with the latest version -->
-		</dependency>
-		<dependency>
-			<groupId>
-				org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.1.2</version> <!-- Replace with the latest version -->
-		</dependency>
+	<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>4.1.2</version>
+	</dependency>	
+
+    <dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml-schemas</artifactId>
+    <version>4.1.2</version>
+	</dependency>
+	
+	<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>4.4.3</version>
+	</dependency>
+
+	<dependency>
+    <groupId>com.opencsv</groupId>
+    <artifactId>opencsv</artifactId>
+    <version>5.7.1</version>
+	</dependency>
 	</dependencies>
 
 </project>

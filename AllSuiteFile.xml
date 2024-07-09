@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ALLSuitesFile">
+ <suite-files>
+        <suite-file path="AttributesTestNG.xml" />
+        <suite-file path="DropdownsTestNG.xml" />
+        <suite-file path="GUITestingTestNG.xml" />
+        <!--suite-file path="UtilitiesTestNG.xml" /-->
+        <!--suite-file path="UIBaseTestNG.xml" /-->
+        <!--suite-file path="FunctionalflowsTestNG.xml" /-->
+        <!-- Add more suite-file elements for additional XML files -->
+    </suite-files>
+</suite> <!-- Suite -->

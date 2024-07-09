@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Failed suite [DropdownValidation]]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)(failed)(failed)">
+    <classes>
+      <class name="TestCases.CCF_DropdownsTesting">
+        <methods>
+          <include name="exit"/>
+          <include name="setup"/>
+          <include name="ApprovalDDListTest"/>
+        </methods>
+      </class> <!-- TestCases.CCF_DropdownsTesting -->
+    </classes>
+  </test> <!-- Test(failed)(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Failed suite [DropdownValidation]]] -->

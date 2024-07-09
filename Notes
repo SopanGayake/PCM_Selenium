@@ -1,0 +1,93 @@
+		int randomNumber = random.nextInt(90000) + 1000;
+		for (WebElement element : FirstSectionTexts)
+		{
+			if(element.getAttribute("name") != null && (element.getAttribute("name").equals("4010")||element.getAttribute("name").equals("4011")))
+			{
+				element.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+				element.sendKeys(String.valueOf(randomNumber));
+			}else {
+			element.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			element.sendKeys(IntValue);
+			}
+		} 
+		--------------------------------------------
+			 element.click();
+	         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+	         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".MuiAutocomplete-listbox")));
+	         List<WebElement> options = driver.findElements(By.cssSelector(".MuiAutocomplete-listbox li"));
+	         for (WebElement option : options) {
+	             System.out.println(option.getText());
+	         }
+	         ------------------------------------------------------
+	         	if(dropdown.getAttribute("aria-label").equals("Type of Pack")) {
+				Assert.assertNotEquals(dropdown.findElement(By.tagName("input")).getAttribute("value"),options.get(2).getText(),"'"+dropdown.getAttribute("aria-label")+"'Dropdown is not Updating");
+				}
+			else{Assert.assertEquals(dropdown.findElement(By.tagName("input")).getAttribute("value"),options.get(2).getText(),"'"+dropdown.getAttribute("aria-label")+"'Dropdown is not Updating");}	
+			options.get(2).click();
+		------------------------------------------------
+		//a[normalize-space()='62852:FPM TO PCF3 Jun24']
+		-----------------------------------------
+		@Test(enabled = true ,dependsOnMethods = {"FrontendPackValidation"})
+		-------------------------------------------------
+		2024-06-13T18:12
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].value = '"+Date+"';", element);
+		    Assert.assertEquals(element.getAttribute("value"),Date);
+		------------------------------------
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		------------------------------------
+		FPMName += System.currentTimeMillis();
+		---------------------------------------
+		driver.navigate().refresh();
+		driver.navigate().back();
+		-------------------------------------
+		//input[@type='checkbox' and @value='true']
+		//input[@value='All India' and not(@checked)]
+		------------------------------------
+		Assert.assertTrue("Yes".equals(element.getAttribute("value")));	
+		------------------------------------------------
+		if (Field1.getAttribute("value") == true) 
+		{
+			Field1.click();
+			Thread.sleep(500); 
+		}
+		Field1.click();
+		Thread.sleep(500);
+		---------------------------------
+				 for (int i = 0; i < FirstectionNumbers.size(); i++) {
+            WebElement element = FirstectionNumbers.get(i);
+            switch (i) {
+                case 0:
+                    // Perform action for the first element
+                	int randomNumber = random.nextInt(90000) + 1000;
+                	element.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+					element.sendKeys(String.valueOf(randomNumber));
+                    break;
+                case 1:
+                	element.sendKeys(IntValue);
+                	element.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+        			Assert.assertTrue(element.getAttribute("value").equals("0"));
+					break;
+                case 2:
+                	element.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+                	element.sendKeys(IntValue);
+        			Assert.assertTrue(element.getAttribute("value").equals(IntValue));
+					break;
+                default:
+                    System.out.println(element.getAttribute("aria-label")+" skiped");
+                    break;
+            }
+        }
+        -----------------------------------------------
+        	if(element.getAttribute("name") != null && (element.getAttribute("name").equals("2318")||element.getAttribute("name").equals("2127")))
+			{Assert.assertEquals(element.getAttribute("value"),StrValue,element.getAttribute("aria-label")+" StrValue is not Updating");}
+			else {Assert.assertNotEquals(element.getAttribute("value"),StrValue,"StrValue is not Updating");}
+			
+			---------------------------------------------------------
+	Set<String> unwantedNames = new HashSet<>(Arrays.asList("2034", "2051", "2035"));
+	String elementName = element.getAttribute("name");
+	if (elementName != null && unwantedNames.contains(elementName)) {
+		Assert.assertNotEquals(element.getAttribute("value"),StrValue,element.getAttribute("aria-label")+" StrValue is not Updating");
+	}
+	else {Assert.assertEquals(element.getAttribute("value"),StrValue,element.getAttribute("aria-label")+" StrValue is not Updating");}

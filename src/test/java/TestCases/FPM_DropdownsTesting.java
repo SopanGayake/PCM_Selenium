@@ -1,134 +1,208 @@
 package TestCases;
 
-import java.io.IOException;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import BasePackage.TestBase;
+import Pages.Dashboard_GUI_Validation;
 import Pages.FPM_DropdownsValidation;
 import Pages.LoginPage;
+import Pages.PCF_DropdownsValidation;
 
 public class FPM_DropdownsTesting extends TestBase { 
 	LoginPage login;
+	Dashboard_GUI_Validation dbs;
 	FPM_DropdownsValidation DD;
 	
 	@BeforeMethod
-	public void setup() throws IOException, InterruptedException  
+	public void setup() throws Exception  
 	{
-	initalization();
-	DD = new FPM_DropdownsValidation();
+		initalization();
+		login =	new LoginPage();
+		login.loginToApp();
+		dbs = new Dashboard_GUI_Validation();
+		DD = new FPM_DropdownsValidation();
 	}
 	@Test(enabled = true)
-	public void TypeOfPackDDTest() throws Exception
+	public void FrontendPackMasterDropdownListTest() throws Exception
 	{
-		DD.TypeOfPackDD();
+		dbs.openFPMForm();
+		DD.FrontendPackMasterDropdownList();
 	}
 	@Test(enabled = true)
-	public void NameOfBroadcasterDDTest() throws Exception
+	public void TypeofPackDDTest() throws Exception
 	{
-		DD.NameOfBroadcasterDD();
+		dbs.openFPMForm();
+		DD.TypeofPackDD();
 	}
 	@Test(enabled = true)
-	public void PackageDashboardCategoryDDTest() throws Exception
+	public void NameofBroadcasterTest() throws Exception
 	{
-		DD.PackageDashboardCategoryDD();
+		dbs.openFPMForm();
+		DD.NameofBroadcasterDD();
 	}
 	@Test(enabled = true)
-	public void OfferTypeforServicesDDTest() throws Exception
+	public void PackageDashboardDDTest() throws Exception
 	{
-		DD.OfferTypeforServicesDD();
+		dbs.openFPMForm();
+		DD.PackageDashboardDD();
 	}
 	@Test(enabled = true)
-	public void PackGradeTypeDDTest() throws Exception
+	public void OfferTypeServicesDDtest() throws Exception
 	{
+		dbs.openFPMForm();
+		DD.OfferTypeServicesDD();
+	}
+	@Test(enabled = true)
+	public void PackGradeTypeDDtest() throws Exception
+	{
+		dbs.openFPMForm();
 		DD.PackGradeTypeDD();
 	}
 	@Test(enabled = true)
 	public void PackStatusDDTest() throws Exception
 	{
+		dbs.openFPMForm();
 		DD.PackStatusDD();
 	}
 	@Test(enabled = true)
-	public void UnitOfMeasureUoMDDTest() throws Exception
+	public void UnitofMeasureDDTest() throws Exception
 	{
-		DD.UnitOfMeasureUoMDD();
+		dbs.openFPMForm();
+		DD.UnitofMeasureDD();
 	}
 	@Test(enabled = true)
-	public void SDHD_DDTest() throws Exception
+	public void SDHDDDTest() throws Exception
 	{
-		DD.SDHD_DD();
+		dbs.openFPMForm();
+		DD.SDHDDD();
 	}
 	@Test(enabled = true)
-	public void BroadcasterCategoryforDisplaysTest() throws Exception
+	public void BroadcasterCategoryDDTest() throws Exception
 	{
-		DD.BroadcasterCategoryforDisplays();
+		dbs.openFPMForm();
+		DD.BroadcasterCategoryDD();
 	}
 	@Test(enabled = true)
-	public void TataPlayPacksCategoryforDisplaysTest() throws Exception
+	public void TataPlayPacksDDTest() throws Exception
 	{
-		DD.TataPlayPacksCategoryforDisplays();
+		dbs.openFPMForm();
+		DD.TataPlayPacks();
 	}
 	@Test(enabled = true)
-	public void ChannelCategoryforDisplayTest() throws Exception
+	public void ChannelCategoryDisplay() throws Exception
 	{
-		DD.ChannelCategoryforDisplay();
+		dbs.openFPMForm();
+		DD.ChannelCategoryDisplayDD();
 	}
 	@Test(enabled = true)
 	public void DASLevelValidationDDTest() throws Exception
 	{
-		DD.DASLevelValidationDD();
+		dbs.openFPMForm();
+		DD.DASLevelValidation();
 	}
 	@Test(enabled = true)
-	public void AnyBoxTypePrimaryBestBoxValidationDDTest() throws Exception
+	public void AnyBoxTypeDDTest() throws Exception
 	{
-		DD.AnyBoxTypePrimaryBestBoxValidationDD();
+		dbs.openFPMForm();
+		DD.AnyBoxTypeDD();
 	}
 	@Test(enabled = true)
-	public void UnitofMeasureUoMforNonODUPacksDD() throws Exception
+	public void UnitOfMeasure2DDtest() throws Exception
 	{
-		DD.UnitofMeasureUoMforNonODUPacksDD();
+		dbs.openFPMForm();
+		DD.UnitOfMeasure2DD();
 	}
 	@Test(enabled = true)
-	public void RENTAL_FLAG_DDTest() throws Exception
+	public void RentalFlagDDTest() throws Exception
 	{
-		DD.RENTAL_FLAG_DD();
+		dbs.openFPMForm();
+		DD.RentalFlagDD();
 	}
 	@Test(enabled = true)
-	public void PAYABLE_FLAG_DDTest() throws Exception
+	public void PayableFlagDDTest() throws Exception
 	{
-		DD.PAYABLE_FLAG_DD();
+		dbs.openFPMForm();
+		DD.PayableFlagDD();
 	}
 	@Test(enabled = true)
-	public void IS_Trai_Enable_flag_DDTest() throws Exception
+	public void IsTraiEnableDDTest() throws Exception
 	{
-		DD.IS_Trai_Enable_flag_DD();
+		dbs.openFPMForm();
+		DD.IsTraiEnableDD();
 	}
 	@Test(enabled = true)
-	public void TobemadeavailablefordealersinmSalesDDTest() throws Exception
+	public void ToMadeinMSalesDDTest() throws Exception
 	{
-		DD.TobemadeavailablefordealersinmSalesDD();
+		dbs.openFPMForm();
+		DD.ToMadeinMSalesDD();
 	}
 	@Test(enabled = true)
-	public void SubscriberTypeNewExistingDDTest() throws Exception
+	public void SubscriberTypeDD() throws Exception
 	{
-		DD.SubscriberTypeNewExistingDD();
+		dbs.openFPMForm();
+		DD.SubscriberTypeDD();
 	}
 	@Test(enabled = true)
-	public void PackVariationDDTest() throws Exception
+	public void PackVariationDD() throws Exception
 	{
+		dbs.openFPMForm();
 		DD.PackVariationDD();
 	}
 	@Test(enabled = true)
-	public void AnyStatelevelvalidationDDTest() throws Exception
+	public void ChannelofFTADDTest() throws Exception
 	{
-		DD.AnyStatelevelvalidationDD();
+		dbs.openFPMForm();
+		DD.ChannelofFTADD();
 	}
 	@Test(enabled = true)
-	public void readExcelData1Test() throws Exception
+	public void ChannelDetailsDropdownList() throws Exception
 	{
-		DD.readExcelData1();
+		dbs.openFPMForm();
+		DD.ChannelDetailsDropdownList();
+	}
+	@Test(enabled = true)
+	public void BackendPackMappingTabDropdownList() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.BackendPackMappingTabDropdownList();
+	}
+	@Test(enabled = true)
+	public void SinglePackDDTest() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.SinglePackDD();
+	}
+	@Test(enabled = true)
+	public void LinksTabDropdownListTest() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.LinksTabDropdownList();
+	}
+	@Test(enabled = true)
+	public void changeHistoryTabDropdownList() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.ChangeHistoryTabDropdownList();
+	}
+	@Test(enabled = true)
+	public void PDMProductLineDDTest() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.PDMProductLineDD();
+	}
+	@Test(enabled = true)
+	public void AnyBoxTypeValidationDDTest() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.AnyBoxTypeValidationDD();
+	}
+	@Test(enabled = true)
+	public void AmazonPrimeVideoDDTest() throws Exception
+	{
+		dbs.openFPMForm();
+		DD.AmazonPrimeVideoDD();
 	}
 	@AfterMethod
 	public void exit() {

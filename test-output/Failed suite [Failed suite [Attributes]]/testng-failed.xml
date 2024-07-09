@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Failed suite [Failed suite [Attributes]]]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)(failed)(failed)">
+    <classes>
+      <class name="TestCases.BPM_AttributesValidationTesting">
+        <methods>
+          <include name="frontendPackSecAttributes"/>
+          <include name="exit"/>
+          <include name="BPMformDetailsTest"/>
+          <include name="backendPackSectionAttributesTest"/>
+          <include name="setup"/>
+          <include name="channelsDetailsAttributesTest"/>
+          <include name="BpmCommentsAttributesTest"/>
+          <include name="changeHistorySecAttributesTest"/>
+          <include name="ChangeHistoryTabTest"/>
+          <include name="backendPackAttributesTest"/>
+          <include name="channelDetailsAttributesTest"/>
+          <include name="frontendPackMappingTab"/>
+          <include name="channelsAddDropAttributesTest"/>
+          <include name="channelDetailsSectionsTest"/>
+          <include name="frontendPackSectionsTest"/>
+          <include name="changeHistorySectionsTest"/>
+          <include name="BPMTabListTest"/>
+          <include name="BackendPackSectionsTest"/>
+        </methods>
+      </class> <!-- TestCases.BPM_AttributesValidationTesting -->
+      <class name="TestCases.PCF_AttributesValidationTesting">
+        <methods>
+          <include name="businessReviewSectionsTest"/>
+          <include name="ChargingAttributesTest"/>
+          <include name="CorporateAttributes"/>
+          <include name="ITReviewTabSectionsTest"/>
+          <include name="RequesterDetailsAttributesTest"/>
+          <include name="exit"/>
+          <include name="SelfCareConfigAttributes"/>
+          <include name="Charging_Applicable_RC_Test"/>
+          <include name="BReviewDetailsAttributesTest"/>
+          <include name="chResidentialAtributesTest"/>
+          <include name="BingeCCFAttributes"/>
+          <include name="changeHistoryAttributesTest"/>
+          <include name="mSalesAttributes"/>
+          <include name="ChangeHistoryAttributesTest"/>
+          <include name="setup"/>
+          <include name="billDescriptionAttributesTest"/>
+          <include name="chTradeAttributesTest"/>
+          <include name="ChargingAccountAttributesTest"/>
+          <include name="discussionAttributesTest"/>
+          <include name="AlertsBillsAttributesTest"/>
+          <include name="SectionNameListTest"/>
+          <include name="Charging_Applicable_NRC_Test"/>
+          <include name="elCommercialAttributes"/>
+          <include name="ITReviewAttributesTest"/>
+          <include name="chCommercialAttributesTest"/>
+          <include name="chSubCategoryAttributesTest"/>
+          <include name="PCFTabsListTest"/>
+          <include name="CARelatedConfigAttributes"/>
+          <include name="ChargingAdditionalAttributesTest"/>
+          <include name="chCorporateAttributesTest"/>
+          <include name="EffortEstimAttributesTest"/>
+          <include name="chRuleOnAccountAtributes"/>
+          <include name="CompatiblePacksTobeTest"/>
+          <include name="itReviewAttributesTest"/>
+          <include name="brCommentsAttributesTest"/>
+          <include name="PackageDetailsAttributesTest"/>
+        </methods>
+      </class> <!-- TestCases.PCF_AttributesValidationTesting -->
+      <class name="TestCases.CCF_AttributesValidationTesting">
+        <methods>
+          <include name="ITReviewSectionsTest"/>
+          <include name="reviewDetailsAttributesTest"/>
+          <include name="alertsBillAttributesTest"/>
+          <include name="ChangeHistorySectionsTest"/>
+          <include name="additionalBusinessSectionsTest"/>
+          <include name="businessReviewSectionsTest"/>
+          <include name="ApprovalAttributes"/>
+          <include name="LinksSecAttributesTest"/>
+          <include name="ChangeHistoryAttributesTest"/>
+          <include name="setup"/>
+          <include name="TestArtifactsAttributes"/>
+          <include name="exit"/>
+          <include name="linksTabSectionsTest"/>
+          <include name="reviewedSignoffAttributesTest"/>
+          <include name="workOrderConsSectionTest"/>
+          <include name="workOrderSecAttributesTest"/>
+          <include name="WorkOrderConTabTest"/>
+          <include name="chargeProductAttributesTest"/>
+          <include name="chargeProductSectionsTest"/>
+          <include name="chargeProductSecAttributesTest"/>
+          <include name="ITReviewAttributesTest"/>
+          <include name="additionalBusinessAttributeTest"/>
+          <include name="changeHistorySecAttributes"/>
+          <include name="attachmentsAttributes"/>
+          <include name="effortEstimationAttributesTest"/>
+          <include name="FPMformDetailsTest"/>
+          <include name="CCFTabList"/>
+          <include name="reviewerNamesAttributesTest"/>
+          <include name="linksTabAttributesTest"/>
+          <include name="pRMServiceAttributesTest"/>
+          <include name="itReviewAttributesTest"/>
+          <include name="ApprovalSections"/>
+          <include name="UATTabSectionsTest"/>
+          <include name="UATTabAttributesTest"/>
+          <include name="AdditionalBusinessSecAttributes"/>
+          <include name="BusinessReviewAttributesTest"/>
+          <include name="approvalSecAttributesTest"/>
+          <include name="priceListAttributesTest"/>
+        </methods>
+      </class> <!-- TestCases.CCF_AttributesValidationTesting -->
+      <class name="TestCases.FPM_AttributesValidationTesting">
+        <methods>
+          <include name="linksAttributesTest"/>
+          <include name="exit"/>
+          <include name="linksTabTest"/>
+          <include name="setup"/>
+          <include name="linksSectionsTest"/>
+        </methods>
+      </class> <!-- TestCases.FPM_AttributesValidationTesting -->
+    </classes>
+  </test> <!-- Test(failed)(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [Failed suite [Attributes]]] -->

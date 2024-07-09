@@ -4,61 +4,84 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.*;
 
 import BasePackage.TestBase;
 
 public class CMAtributsValidation extends TestBase {
-	@FindBy(xpath="//button[@aria-label='open drawer']") private WebElement openDrawerMenu;
-	@FindBy(xpath="//span[text()='CM']") private WebElement SelectCMWI;
-	@FindBy(xpath="//p[text()='Channel Master']") private WebElement SelectChannelMasterTab;
-	@FindBy(xpath="//p[text()='Content Team ']") private WebElement ContentTeamSection;
-	@FindBy(xpath="//p[text()='Subscriber Marketing Team ']") private WebElement SubscriberMarketingTeam;
-	@FindBy(xpath="//p[text()='EPG Team ']") private WebElement EPGTeamAtributs;
-	@FindBy(xpath="//p[text()='Technology Team ']") private WebElement TechnologyTeamAtributes;
-	@FindBy(xpath="//p[text()='Video Details ']") private WebElement VideoDetailsAtributes;
-	@FindBy(xpath="//p[text()='Content & Technology ']") private WebElement ContentTechnologyAtributes;
-	@FindBy(xpath="//p[text()='Audio Details ']") private WebElement AudioDetailsAtributes;
-	@FindBy(xpath="//p[text()='Technical Contact Details - Broadcaster ']") private WebElement TechnicalContactDetailsBroadcasterAtributes;
-	@FindBy(xpath="//p[text()='Distribution Contact Details  ']") private WebElement DistributionContactDetailsAtributes;
-	@FindBy(xpath="//p[text()='Distribution Contact Details - EPG ']") private WebElement DistributionContactDetailsEPG;
-	@FindBy(xpath="//p[text()='Satellite Details ']") private WebElement SatelliteDetailsAtributes;
-	@FindBy(xpath="//p[text()='logo platform']") private WebElement logoPlatformTab;
-	@FindBy(xpath="//p[text()='logos platform ']") private WebElement logoPlatformSection;
-	@FindBy(xpath="//p[text()='Approval']") private WebElement ApprovalAtributesTab;
-	@FindBy(xpath="//p[text()='Approval ']") private WebElement ApprovalAtributesSection;
-	
-	String TestDataExcel = "C:\\Users\\Sopan Gayake\\eclipse-workspace\\PCMTestingFramework\\TestData\\TestDataFileCM.xlsx";
-	public CMAtributsValidation() {
+	@FindBy(xpath="//p[text()='Logos Platform']") private WebElement logoPlatformTab;
+	@FindBy(xpath="//p[text()='Change History']") private WebElement ChangeHistoryTab;
+	@FindBy(xpath="//p[text()='Approvals']") private WebElement ApprovalsTab;
+
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[12]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> TwelthectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[11]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> EleventhSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[10]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> ThenthSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[9]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> NineSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[8]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> EightSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[7]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> SeventhSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[6]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> SixthSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[5]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> FifthSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[4]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> FourthSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[3]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> ThirdSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[2]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> SecondSectionAttributes;
+	@FindAll({@FindBy(xpath = "(//div[@id='panel1-content'])[1]//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> FirstSectionAttributes;
+	@FindAll({@FindBy(xpath = "//select[@class='form-control form-control-style']")})private List<WebElement> DropdownsList;
+	@FindAll({@FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body2 tabSectionTitle css-hoiwr4-MuiTypography-root']")})private List<WebElement> TabsList;
+    @FindAll({@FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']")})private List<WebElement> AttributesList;
+    @FindAll({@FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body2 css-1d3njat-MuiTypography-root']")})private List<WebElement> SectionList;
+    @FindAll({@FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body1 css-sf1wrq-MuiTypography-root']")})private List<WebElement> FormDetails;
+
+    String TestDataExcel = "C:\\Users\\Sopan.Gayake\\eclipse-workspace\\PCMTestingFramework\\TestData\\CM_ui_table.xlsx";
+	ArrayList<String> ExcelTestData = new ArrayList<>();
+	List<String> webSectionList = new ArrayList<>();
+	public CMAtributsValidation() { 
 		PageFactory.initElements(driver, this);
 	}
-	public void TabsOfCMPage() throws Exception
-	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		Thread.sleep(2000);
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 tabSectionTitle css-hoiwr4-MuiTypography-root']"));
-		for (WebElement element : elements)
+	public void formDetails() throws Exception
+	{	 
+		for (WebElement element : FormDetails)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		ArrayList<String> ExcelTestData = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-			Sheet sheet = workbook.getSheet("CMTabs"); // Assuming you want to read data from sheet 2
+		Sheet sheet = workbook.getSheet("ChannelMasterAtributes"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(4); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	} 
+	public void TabsOfCMPage() throws Exception
+	{	 
+		for (WebElement element : TabsList)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+			Sheet sheet = workbook.getSheet("ChannelMasterAtributes"); // Assuming you want to read data from sheet 2
 			    for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 			        Row row = sheet.getRow(rowNum);
 			        if (row != null) {
@@ -76,31 +99,92 @@ public class CMAtributsValidation extends TestBase {
 			    } else {
 	    			throw new Exception("Failed because List are not Matching");
 		 		}
-			}
-	public void SectionsChannelMaster() throws Exception
+			} 
+	public void ChannelMasterAtributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-1f3fto2-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : AttributesList)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		ArrayList<String> ExcelTestData = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("CMTabs"); // Assuming you want to read data from sheet 2
+		Sheet sheet = workbook.getSheet("ChannelMasterAtributes"); // Assuming you want to read data from sheet 2
 		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 			Row row = sheet.getRow(rowNum);
 			if (row != null) {
 				Cell cell = row.getCell(1); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+			 
+		}
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void LogoPlatformTab() throws Exception
+	{
+		logoPlatformTab.click();
+		Thread.sleep(2000);
+		for (WebElement element : AttributesList)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("ChannelMasterAtributes"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+				Row row = sheet.getRow(rowNum);
+				if (row != null) {
+					Cell cell = row.getCell(2); // Column 1
+					
+					if (cell != null) {
+						String cellValue = cell.getStringCellValue();
+						ExcelTestData.add(cellValue);
+					}
+				}
+		}
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void HistoryTab() throws Exception
+	{
+		ChangeHistoryTab.click();
+		Thread.sleep(2000);
+		for (WebElement element : AttributesList)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("ChannelMasterAtributes"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(3); // Column 1
 				
 				if (cell != null) {
 					String cellValue = cell.getStringCellValue();
@@ -115,26 +199,81 @@ public class CMAtributsValidation extends TestBase {
 			throw new Exception("Failed because List are not Matching");
 		}
 	}
-	public void SectionslogoPlatformTab() throws Exception
+	public void sectionListName() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		logoPlatformTab.click();
-		Thread.sleep(2000);
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-1f3fto2-MuiTypography-root']"));
-		for (WebElement element : elements)
+	
+		for (WebElement element : SectionList)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		ArrayList<String> ExcelTestData = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("CMTabs"); // Assuming you want to read data from sheet 2
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(0); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void contentTeamAtributes() throws Exception
+	{
+		for (WebElement element : FirstSectionAttributes)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(1); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+		}
+		System.out.println("e"+ExcelTestData);
+		System.out.println("w"+webSectionList);
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
+	public void smSectionAttributes() throws Exception
+	{
+		for (WebElement element : SecondSectionAttributes)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
 		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 			Row row = sheet.getRow(rowNum);
 			if (row != null) {
@@ -153,31 +292,23 @@ public class CMAtributsValidation extends TestBase {
 			throw new Exception("Failed because List are not Matching");
 		}
 	}
-
-	public void SectionsApproval() throws Exception {
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		ApprovalAtributesTab.click();
-		Thread.sleep(2000);
-
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(
-				By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-1f3fto2-MuiTypography-root']"));
-		for (WebElement element : elements) {
-			if (element.getText() != "" && element.getText() != " ") {
+	public void epgSectionAttributes() throws Exception
+	{
+		for (WebElement element : ThirdSectionAttributes)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
-		}
-		ArrayList<String> ExcelTestData = new ArrayList<>();
+		} 
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("CMTabs"); // Assuming you want to read data from sheet 2
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
 		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
 			Row row = sheet.getRow(rowNum);
 			if (row != null) {
 				Cell cell = row.getCell(3); // Column 1
-
+				
 				if (cell != null) {
 					String cellValue = cell.getStringCellValue();
 					ExcelTestData.add(cellValue);
@@ -191,479 +322,371 @@ public class CMAtributsValidation extends TestBase {
 			throw new Exception("Failed because List are not Matching");
 		}
 	}
-	public void ContentTeamAtributes() throws Exception
+	public void technologlySectionAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		ContentTeamSection.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : FourthSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Content Team");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(4); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } 
-		else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void SubscriberMarketingTeamAtributs() throws Exception
+	public void videoSectionAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		SubscriberMarketingTeam.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : FifthSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Subscriber Marketing Team");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(5); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void EPGTeamAtributs() throws Exception
+	public void contentTechAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		EPGTeamAtributs.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : SixthSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("EPG Team");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(6); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void TechnologyTeamAtributes() throws Exception
+	public void audioAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		TechnologyTeamAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : SeventhSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("TechnologyTeam");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(7); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void VideoDetailsAtributes() throws Exception
+	public void technicalContactAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		VideoDetailsAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : EightSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Video Details");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(8); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	
-	public void ContentTechnologyAtributes() throws Exception
+	public void distributionAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		ContentTechnologyAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : NineSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Content & Technology");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(9); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	
-	public void AudioDetailsAtributes() throws Exception
+
+	public void distributionEPGAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		AudioDetailsAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : ThenthSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Audio Details");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(10); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void TechnicalContactDetailsBroadcasterAtributes() throws Exception
+	public void satelliteAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		TechnicalContactDetailsBroadcasterAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : EleventhSectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Technical Contact Details - Bro");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(11); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void DistributionContactDetailsAtributes() throws Exception
+	public void commentsAttributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		DistributionContactDetailsAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : TwelthectionAttributes)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Distribution Contact Details");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
-		}
-		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
-	}
-	
-	public void DistributionContactDetailsEPG() throws Exception
-	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		DistributionContactDetailsEPG.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
-		{
-			if( element.getText() != "" && element.getText() != " " ) {
-				webSectionList.add(element.getText());
-				System.out.println(element.getText());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(12); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
 			}
-		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
-		FileInputStream excelFile = new FileInputStream(TestDataExcel);
-		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Distribution Contact Details EP");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
-	}
-	
-	public void SatelliteDetailsAtributes() throws Exception
-	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		SelectChannelMasterTab.click();
-		Thread.sleep(2000);
-		SatelliteDetailsAtributes.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
-		{
-			if( element.getText() != "" && element.getText() != " " ) {
-				webSectionList.add(element.getText());
-				System.out.println(element.getText());
-			}
-		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
-		FileInputStream excelFile = new FileInputStream(TestDataExcel);
-		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Satellite Details");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
 		}
-		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
 	}
-	public void logoPlatformTab() throws Exception
+	public void logoPlatformTabAtributes() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
 		logoPlatformTab.click();
-		Thread.sleep(2000);
-		logoPlatformSection.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		for (WebElement element : AttributesList)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("logo platform");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(13); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+			
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
 	}
-	public void ApprovalAtributes() throws Exception
+	public void ApprovalsTabSection() throws Exception
 	{
-		openDrawerMenu.click();
-		SelectCMWI.click();
-		ApprovalAtributesTab.click();
-		Thread.sleep(2000);
-		ApprovalAtributesSection.click();
-		
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//p[@class='MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root']"));
-		for (WebElement element : elements)
+		ApprovalsTab.click();
+		for (WebElement element : SectionList)
 		{
 			if( element.getText() != "" && element.getText() != " " ) {
 				webSectionList.add(element.getText());
 				System.out.println(element.getText());
 			}
 		} 
-		
-		List<String> excelSectionList = new ArrayList<>();
 		FileInputStream excelFile = new FileInputStream(TestDataExcel);
 		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("Approval");
-
-		for (Row row : sheet) {
-			Cell cell = row.getCell(0); // Assuming the attributes are in the first column (index 0)
-			excelSectionList.add(cell.getStringCellValue());
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(15); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
 		}
 		workbook.close();
-		excelFile.close();
-		
-		if (webSectionList.equals(excelSectionList)) {
-            System.out.println("Both lists of web elements are the same.");
-        } else {
-			throw new Exception("Failed because List are not matching");
-        }
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+		;
 	}
-	
-
+	public void ChangeHistoryTabAtributes() throws Exception
+	{
+		ChangeHistoryTab.click();
+		for (WebElement element : AttributesList)
+		{
+			if( element.getText() != "" && element.getText() != " " ) {
+				webSectionList.add(element.getText());
+				System.out.println(element.getText());
+			}
+		} 
+		FileInputStream excelFile = new FileInputStream(TestDataExcel);
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet sheet = workbook.getSheet("SectionsAttribute"); // Assuming you want to read data from sheet 2
+		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+			Row row = sheet.getRow(rowNum);
+			if (row != null) {
+				Cell cell = row.getCell(14); // Column 1
+				
+				if (cell != null) {
+					String cellValue = cell.getStringCellValue();
+					ExcelTestData.add(cellValue);
+				}
+			}
+			
+		}
+		workbook.close();
+		if (webSectionList.equals(ExcelTestData)) {
+			System.out.println("Both lists of web elements are the same.");
+		} else {
+			throw new Exception("Failed because List are not Matching");
+		}
+	}
 }

@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -32,52 +33,79 @@ public class AddButtonsValuesMapping extends TestBase {
 	@FindBy(xpath="//p[text()='Distribution Contact Details  ']") private WebElement DistributionContactDetailsAtributes;
 	@FindBy(xpath="//p[text()='Distribution Contact Details - EPG ']") private WebElement DistributionContactDetailsEPG;
 	@FindBy(xpath="//p[text()='Satellite Details ']") private WebElement SatelliteDetailsAtributes;
-	@FindBy(xpath="//p[text()='logo platform']") private WebElement logoPlatformTab;
-	@FindBy(xpath="//p[text()='logos platform ']") private WebElement logoPlatformSection;
+	@FindBy(xpath="//p[text()='Logos Platform']") private WebElement logoPlatformTab;
+	@FindBy(xpath="//p[text()='Frontend Pack Master']") private WebElement FrontendPackMasterTab;
+	@FindBy(xpath="//p[text()='Channel Details']") private WebElement ChannelDetailsTab;
 	@FindBy(xpath="//p[text()='Approval']") private WebElement ApprovalAtributesTab;
 	@FindBy(xpath="//p[text()='Approval ']") private WebElement ApprovalAtributesSection;
 	
+	@FindAll({@FindBy(xpath = "//span[text()='+ Add']")})private List<WebElement> AddButtons;
+	
 	String TestDataExcel = "C:\\Users\\Sopan Gayake\\eclipse-workspace\\PCMTestingFramework\\TestData\\TestDataFileCM.xlsx";
+	List<String> webSectionList = new ArrayList<>();
 	public AddButtonsValuesMapping()
 	{
 	PageFactory.initElements(driver, this);
 	}
-	public void GetNameOfAddButtons() throws Exception
+	public void CM_Channel_Master() throws Exception
 	{
-		SelectChannelMasterTab.click();
-		ContentTeamSection.click();
-		SubscriberMarketingTeam.click();
-		EPGTeamAtributs.click();
-		List<String> webSectionList = new ArrayList<>();
-		List<WebElement> elements = driver.findElements(By.xpath("//button[text()='+ Add']/preceding::div[2]"));
-		for (WebElement element : elements) {
-			if( element.getText() != "" && element.getText() != " ") {
-        	webSectionList.add(element.getText());
-        	System.out.println(element.getText());
-			}
-        }
-		ArrayList<String> ExcelTestData = new ArrayList<>();
-		FileInputStream excelFile = new FileInputStream(TestDataExcel);
-		Workbook workbook = new XSSFWorkbook(excelFile);
-		Sheet sheet = workbook.getSheet("CMAddButtons"); // Assuming you want to read data from sheet 2
-		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-			Row row = sheet.getRow(rowNum);
-			if (row != null) {
-				Cell cell = row.getCell(0); // Column 1
-				
-				if (cell != null) {
-					String cellValue = cell.getStringCellValue();
-					ExcelTestData.add(cellValue);
-				}
-			}
+	for (WebElement element : AddButtons) {
+		element.getAttribute("aria-label");
+    	webSectionList.add(element.getAttribute("aria-label"));
+    	System.out.println(element.getAttribute("aria-label"));
 		}
-		workbook.close();
-		if (webSectionList.equals(ExcelTestData)) {
-			System.out.println("Both lists of web elements are the same.");
-		} else {
-			throw new Exception("Failed because List are not Matching");
+     }
+	public void CM_Logo_Platform () throws Exception
+	{
+		logoPlatformTab.click();
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
 		}
-	} 
+	}
+	public void FPM_FrontendPackMaster () throws Exception
+	{
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		}
+	}
+	public void FPM_ChannelDetailsTab () throws Exception
+	{
+		ChannelDetailsTab.click();
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		}
+	}
+	public void BPM_ChannelDetailsTab () throws Exception
+	{
+		ChannelDetailsTab.click();
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		}
+	}
+	public void BPM_BackendPackMaster () throws Exception
+	{
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		}
+	}
+	public void PCF_PackageCreationForm () throws Exception
+	{
+		for (WebElement element : AddButtons) {
+			element.getAttribute("aria-label");
+			webSectionList.add(element.getAttribute("aria-label"));
+			System.out.println(element.getAttribute("aria-label"));
+		}
+	}
 	public void SecondaryGenreAB() throws Exception
 	{
 		openDrawerMenu.click();
@@ -86,38 +114,8 @@ public class AddButtonsValuesMapping extends TestBase {
 		ContentTeamSection.click();
 		WebElement SecondaryGenre = driver.findElement(By.xpath("(//p[text()='Secondary Genre']/following::div/following::button)[1]"));
 		SecondaryGenre.click();
-//		List<String> webSectionList = new ArrayList<>();
-//		WebElement Dropdown = driver.findElement(By.xpath("//Select[@class='QueryResults']"));
-//		List<WebElement> optionElements = Dropdown.findElements(By.xpath("//Select[@class='QueryResults']//option"));
-//        for (WebElement option : optionElements) {
-//        	if( option.getText() != "" && option.getText() != " ") {
-//				webSectionList.add(option.getText());
-//			}
-//        }
-//        driver.findElement(By.xpath("//button[@class='btn-close']")).click();
-//        ContentTeamSection.click();
-//		ArrayList<String> ExcelTestData = new ArrayList<>();
-//		FileInputStream excelFile = new FileInputStream(TestDataExcel);
-//		Workbook workbook = new XSSFWorkbook(excelFile);
-//		Sheet sheet = workbook.getSheet("CMAddButtons"); // Assuming you want to read data from sheet 2
-//		for (int rowNum = 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
-//			Row row = sheet.getRow(rowNum);
-//			if (row != null) {
-//				Cell cell = row.getCell(1); // Column 1
-//				
-//				if (cell != null) {
-//					String cellValue = cell.getStringCellValue();
-//					ExcelTestData.add(cellValue);
-//				}
-//			}
-//		}
-//		workbook.close();
-//		if (webSectionList.equals(ExcelTestData)) {
-//			System.out.println("Both lists of web elements are the same.");
-//		} else {
-//			throw new Exception("Failed because List are not Matching");
-//		}
-	} 
+	}
+
 	public void SDMappingAB() throws Exception
 	{
 		openDrawerMenu.click();

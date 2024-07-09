@@ -1,11 +1,13 @@
 package Pages;
 
-import java.io.IOException;
-
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import BasePackage.TestBase;
 
@@ -15,150 +17,103 @@ public class LoginPage extends TestBase{
 	//Object Repository GUI
 	
 	
-//	@FindBy(xpath="//*//*[@id=\"jazz_app_internal_LoginWidget_0\"]/div[1]/div[1]/div[1]/div") private WebElement jazzLogo;
-	@FindBy(xpath="//p[@class='label-welcome']") private WebElement WelcomeHeading;
-//	@FindBy(xpath="//div[@class='illustration']") private WebElement Image;
-	@FindBy(xpath="//label[text()='Email Id']") private WebElement UserIDlabel;
-//	@FindBy(xpath="//label[text()='Email Id']") private WebElement UserIDBorder;
-	@FindBy(xpath="//input[@name='email']") private WebElement UserIDTextBox;
-	@FindBy(xpath="//label[text()='Password']") private WebElement PasswordLabel;
+	@FindBy(xpath="//input[@name='username']") private WebElement UserIDTextBox;
 	@FindBy(xpath="//input[@name='password']") private WebElement PasswordTextBox;
-//	@FindBy(xpath="//div[@widgetid='jazz_app_internal_LoginWidget_0_password']") private WebElement PasswordBorder;
-	@FindBy(xpath="//button[@type='submit']") private WebElement SigninButton;
-//	@FindBy(xpath="//input[@name='rememberUserId']") private WebElement rememberUserIdCheckBox;
-//	@FindBy(xpath="//label [text()='Remember my User ID']") private WebElement rememberUserIdLabel;
-//	@FindBy(xpath="//div[@class='loginErrorMessage']") private WebElement loginErrorMessage;
-//	@FindBy(xpath="//div[@class='loginDialogFooter']") private WebElement loginFooter;
-//	@FindBy(xpath="////a[@class='rational-logo']") private WebElement rationalLogo;
-//	@FindBy(xpath="//a[@class='ibm-logo']") private WebElement ibmLogo;
-//	@FindBy(xpath="//div[@class='content']") private WebElement containerNode;
-//	@FindBy(xpath="//span[@class='user-name']") private WebElement UserName;
-		
+	@FindBy(xpath="//button[text()='Sign In']") private WebElement SigninButton;
 		//Constructor for element initialization
 		public LoginPage()
 		{
 		PageFactory.initElements(driver, this);
 		}
-		
-		// GUI Testing for jazzLogo
-//		public Dimension TestJazzLogo()
-//		{
-//			System.out.println("is java visible"+ jazzLogo.isDisplayed());
-//			return jazzLogo.getSize();
-//		} 
-//		public String getLoginInstruction()
-//		{
-//		return LoginInstruction.getText();
-//		}
-//		public Dimension verifyImage()
-//		{
-//		return Image.getSize();
-//		}
-//		public String verifyUserIDlabel()
-//		{
-//		return UserIDlabel.getText();
-//		}
-//		public Dimension verifyUserIDBorder()
-//		{
-//		return UserIDBorder.getSize();
-//		}
-		public void verifyUserIDTextBox()
+		 
+		public void verifyWelcomeHeading() throws Exception
 		{
-		UserIDTextBox.sendKeys("123");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("abc");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("*#$");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("1a*");
-		System.out.println("we can enter all dataType");
+			WebElement WelcomeHeading = driver.findElement(By.xpath("//Span[text()='Welcome to Channel and Pack Management']"));
+			WelcomeHeading.isDisplayed();
+			driver.findElement(By.xpath("//span[text()='Login']"));
+			Dimension Size = WelcomeHeading.getSize();
+			System.out.println(Size);
+//			Dimension Expected = new Dimension(1232, 45);
+//			boolean isEqual = Size.equals(Expected);
+//			 if (isEqual) {
+//		            System.out.println("Please fill out this field.");
+//		        } else {
+//		        	throw new Exception("Failed because result is not equal.");
+//		        }
 		}
 		
-		public String verifyPasswordLabel()
+		public void verifyUsername() throws Exception
 		{
-		return PasswordLabel.getText();
+			WebElement EmailIDLabel = driver.findElement(By.xpath("//span[text()='Username']"));
+			EmailIDLabel.isDisplayed();
+			UserIDTextBox.sendKeys("123");
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//input[@value='123']"));
+			UserIDTextBox.sendKeys(Keys.CONTROL+"a");
+			UserIDTextBox.sendKeys(Keys.BACK_SPACE);
+			UserIDTextBox.sendKeys("abc");
+			driver.findElement(By.xpath("//input[@value='abc']"));
+			UserIDTextBox.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			UserIDTextBox.sendKeys("*#$");
+			driver.findElement(By.xpath("//input[@value='*#$']"));
+			UserIDTextBox.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			UserIDTextBox.sendKeys("1a*");
+			driver.findElement(By.xpath("//input[@value='1a*']"));
+			driver.findElement(By.xpath("//p[text()='Please enter password']"));
 		}
-//		public Dimension verifyPasswordBorder()
-//		{
-//		return PasswordBorder.getSize();
-//		}
-		public void verifyPasswordTextBox()
-		{
-		UserIDTextBox.sendKeys("123");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("abc");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("*#$");
-		UserIDTextBox.clear();
-		UserIDTextBox.sendKeys("1a*");
-		System.out.println("we can enter all dataType");
+		public void verifyPassword(){
+			WebElement PasswordLabel = driver.findElement(By.xpath("//span[text()='Password']"));
+			PasswordLabel.isDisplayed();
+			PasswordTextBox.sendKeys("123");
+			Assert.assertEquals(PasswordTextBox.getAttribute("value"),"123",PasswordTextBox.getAttribute("value"));
+			PasswordTextBox.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			PasswordTextBox.sendKeys("abc");
+			Assert.assertEquals(PasswordTextBox.getAttribute("value"),"abc",PasswordTextBox.getAttribute("value"));
+			PasswordTextBox.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			PasswordTextBox.sendKeys("*#$");
+			Assert.assertEquals(PasswordTextBox.getAttribute("value"),"*#$",PasswordTextBox.getAttribute("value"));
+			PasswordTextBox.sendKeys(Keys.CONTROL+"a",Keys.BACK_SPACE);
+			PasswordTextBox.sendKeys("1a*");
+			Assert.assertEquals(PasswordTextBox.getAttribute("value"),"1a*",PasswordTextBox.getAttribute("value"));
+			driver.findElement(By.xpath("//p[text()='Please enter username']"));
+
 		}
-		public void verifySigninButton()
+		public void verifySigninButton() throws Exception
 		{
-			System.out.println(SigninButton.getSize());
-			System.out.println(SigninButton.getText());
-		}
-//		public void verifyrememberUserIdCheckBox() throws InterruptedException
-//		{
-//			System.out.println(rememberUserIdCheckBox.getSize());
-//			rememberUserIdCheckBox.click();
-//			Thread.sleep(2000);
-//			boolean isSelected1 = rememberUserIdCheckBox.isSelected();
-//			if (isSelected1) {
-//			    System.out.println("Yes");
-//			} else {
-//			    System.out.println("No");
-//			}
-//			rememberUserIdCheckBox.click();
-//			boolean isSelected2 = rememberUserIdCheckBox.isSelected();
-//			if (isSelected2) {
-//			    System.out.println("Yes");
-//			} else {
-//			    System.out.println("No");
-//			}
-//		}
-//		public void verifyRememberUserIdLabel()
-//		{
-//			String buttonText = rememberUserIdLabel.getText();
-//			String comparisonString = "Remember my User ID";
-//
-//			if (buttonText.equals(comparisonString)) {
-//			    System.out.println("The button text is equal to 'Remember my User ID'.");
-//			} else {
-//			    System.out.println("The button text is not equal to 'Remember my User ID'.");
-//			}
-//		}
-//		public String VerifyLoginErrorMessage()
-//		{
-//			if (loginErrorMessage.isDisplayed()){
-//			    System.out.println("test case fail");
-//			} else {
-//				PasswordTextBox.sendKeys("123");
-//				SubmitButton.click();
-//			}
-//			return loginErrorMessage.getText();
-//		}
-//		public void verifyLoginFooter()
-//		{
-//			String loginFooterText = loginFooter.getText();
-//			String comparisonString ="Licensed Material - Property of IBM Corp. © Copyright IBM Corp. and its licensors 2008, 2019. All Rights Reserved. IBM, the IBM logo, Jazz, and Rational are trademarks of IBM Corporation, in the United States, other countries and regions, or both. Built on Eclipse is a trademark of Eclipse Foundation, Inc. Java and all Java-based trademarks and logos are trademarks or registered trademarks of Oracle and/or its affiliates in the United States, other countries and regions, or both.";
-//
-//			if (loginFooterText.equals(comparisonString)) {
-//			    System.out.println("The button text is equal to expected text");
-//			} else {
-//				System.out.println(loginFooterText);
-//			    System.out.println("The button text is not equal to to expected text");
-//			}
-//		}
-		public void loginToApp() throws InterruptedException, IOException
-		{
-			UserIDTextBox.sendKeys(readPropertyFile("user_id"));
-			PasswordTextBox.sendKeys(readPropertyFile("password"));
+			SigninButton.isEnabled();
 			SigninButton.click();
+			driver.findElement(By.xpath("//p[text()='Please enter username']"));
+			UserIDTextBox.sendKeys(readPropertyFile("user_id"));
+			SigninButton.click();
+            driver.findElement(By.xpath("//p[text()='Please enter password']"));
+			PasswordTextBox.sendKeys(readPropertyFile("user_id"));
+			SigninButton.click();
+			// Need to Check the error message
+			PasswordTextBox.sendKeys(readPropertyFile("password"));
+			UserIDTextBox.sendKeys(readPropertyFile("password"));
+			SigninButton.click();
+			// Need to Check the error message
+			PasswordTextBox.sendKeys(readPropertyFile("password"));
+			UserIDTextBox.sendKeys(readPropertyFile("user_id"));
 			
+			
+//			Dimension Size = SigninButton.getSize();
+//			System.out.println(Size);
+//			Dimension Expected = new Dimension(185, 36);
+//			boolean isEqual = Size.equals(Expected);
+//			 if (isEqual) {
+//		            System.out.println("The result is equal.");
+//		        } else {
+//		        	throw new Exception("Failed because result is not equal.");
+//		        }
+		}
+		public void loginToApp() throws Exception 
+		{
+			SendKey("UserIDTextBox_XPATH", readPropertyFile("user_id") );
+			SendKey("PasswordTextBox_XPATH" , readPropertyFile("password"));
+			click("SigninButton_XPATH");
 		}
 	}
 
-		//Encapsulation = data (private) + method (public)
 
 
